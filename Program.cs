@@ -8,6 +8,7 @@ public class Program
     
     public static void Main()
     {
+        //g
         List<Customer> myList = new List<Customer>();
         Customer cust1 = new Customer { FirstName = "Joe", LastName = " Smith" };
         Customer cust2 = new Customer { FirstName = "Jane", LastName = " Jones" };
@@ -27,11 +28,14 @@ public class Program
         {
             table.TableOpened += cust.OnTableOpenned;
             table.OpenTheTable();
-            
+            table.TableOpened -= cust.OnTableOpenned;
+
+
             foreach (string s in Enum.GetNames(meals))
             {
-                
+
                 MealOfCustomer(cust, s);
+                
             }
             
 
@@ -82,7 +86,11 @@ public class Customer
         Console.WriteLine("{0}{1} got a table.", this.FirstName, this.LastName);
     }
 
-    
+    public void ChangeTheMeal(string meal)
+    {
+        OnMealChanged(meal);
+    }
+
     protected virtual void OnMealChanged(string meal)
     {
         if(MealChanged != null)
